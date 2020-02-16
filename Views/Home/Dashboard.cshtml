@@ -1,0 +1,26 @@
+@model Product
+<a asp-action="Roles" asp-controller="Adminstration">Roles</a>
+<div class="container">
+    <partial name="menupartial"></partial>
+    <div class="sidebar">
+        <form asp-action="Dashboard">
+            <div class="form-group">
+                <input asp-for="Title" class="form-control" type="text" placeholder="search...">
+            </div>
+            <div class="form-group"><input class="btn btn-primary" type="submit" value="Filter"> </div>  
+        </form>
+    </div>
+    <div class="content">
+        @{
+            foreach(var x in ViewBag.products)
+            {
+                <div class="products">
+                    <div class="component">
+                        <a asp-action="ViewProduct" asp-route-productid="@x.ProductId"><img src="@x.Image"></a>
+                            <h5 class="price">$@x.Price</h5>
+                    </div>
+                    <h6 id="label">@x.Title</h6>
+                </div>}}
+
+</div>
+

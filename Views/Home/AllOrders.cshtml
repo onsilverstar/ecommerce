@@ -1,0 +1,33 @@
+
+<form asp-action="SearchOrders">
+    <input class="form-control" placeholder="Search..."> 
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>OrderId</td>
+            <td>Name</td>
+            <td>Date</td>
+            <td>Shipping Address</td>
+            <td>Order Total</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var k in Model)
+            {
+                <tr>
+                <td>@k.OrderId</td>
+                <td>@k.customer.UserName</td>
+                <td>@DateTime.Now</td>
+                <td>@k.FirstName @k.LastName @k.Address @k.City @k.ZipCode @k.State</td>
+                <td>@k.customer.Products.Count</td>
+                <td>Shipped</td>
+                </tr>
+
+            }
+        }
+
+    </tbody>
+</table>

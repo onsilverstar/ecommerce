@@ -1,0 +1,63 @@
+@model OrderItem
+<partial name="menupartial"></partial>
+<h4><strong>Add a new order</strong></h4>
+<form asp-action="AddOrder">
+    <div class="form-group">
+        <span asp-validation-for="Customer"></span>
+        <label asp-for="Customer"></label>
+        <select asp-for="Customer" class="form-control">
+        @{ foreach(var y in ViewBag.customers)
+        {
+            <option>@y.Name</option>
+        }
+        }
+        </select>
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Order"></span>
+        <label asp-for="Order"></label>
+        <input class="form-control" asp-for="Order">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Item"></span>
+        <label asp-for="Item"></label>
+        <select asp-for="Item" class="form-control">
+        @{foreach(var n in ViewBag.products)
+        {
+            <option>@n.Title</option>
+        }
+        }
+        </select>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Order">
+    </div>
+</form>
+<form asp-action="Orders">
+    <div class="form-group">
+         <input asp-for="Product" class="form-control" placeholder="filter">
+    </div>  
+</form>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Customer Name</td>
+            <td>Product</td>
+            <td>Quantity</td>
+            <td>Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{foreach(var m in ViewBag.order)
+            {
+                <tr>
+                    <td>@m.customer.Name</td>
+                    <td>@m.product.Title</td>
+                    <td>@m.product.InitialQuantity</td>
+                    <td>@m.customer.CreatedAt</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+﻿.listed {text-decoration: none;
+    vertical-align: top;
+    display: inline-block;
+    color: rgb(255, 0, 212);
+}
+ul {margin-left: 30px;
+    margin-right: 30px;
+    display: inline-block;
+    padding: 0px;}
+#menu {padding-right: 0px;
+    padding-left: 0px;
+    display: block;
+    border: 0px;}
+    
+img{
+    display: inline-block;
+    width: 170px;
+    height: 170px;
+    vertical-align: top;
+    margin-bottom: -25px
+}
+.products{
+    display: inline-block;
+    width: 220px;
+    height: 220px;
+    vertical-align: top;
+}
+#elements{display: inline-block;
+}
+.image{display:inline-block; vertical-align: top; text-align: center; margin-bottom: -40px;}
+.hidden{width:200px}
+.container{width: 1200px;
+height: 1200px;
+padding: 15px;
+display: block;
+outline: 1px dotted blue
+}
+.sidebar{display: inline-block;
+width: 200px;
+height: 1138px;
+vertical-align:top;
+outline:1px dotted red}
+.content{display: inline-block; outline: 1px dotted purple; height: 1138px; width: 930px; margin:0px 15px; vertical-align: top}
+.price{background-color: grey; width: 170px; text-align: center; border-bottom: none; outline: 1px dotted orange; z-index: 1; position: relative}
+.products h6 #label{text-align: center; width: 170px; display: block}
+.productbar{display: inline-block; width: 250px; height: 400px; vertical-align: top}
+.productdescription{display: inline-block; width: 800px; height: 800px;}
+.productdescription p{display: inline-block}
+.productdescription form{display: inline-block; vertical-align: top}
+.productssilimar{display: block; height: 300px; width: 1000px;}
+.title{display: inline-block; vertical-align: top}
+.component{display: inline-block; vertical-align: top; margin-left: 10px}

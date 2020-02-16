@@ -1,0 +1,29 @@
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+@model List<CartItem>
+<partial name="menupartial"></partial>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var k in Model)
+            {
+                <tr>
+                    <td>@k.product.Title</td>
+                    <td>@k.product.Price</td>
+                    <td>@k.Quantity</td>
+                    <td>@(@k.product.Price*@k.Quantity)</td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,43 @@
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+<partial name="menupartial"></partial>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var n=0;
+            foreach(var k in ViewBag.purchases)
+            {
+                <tr>
+                    <td>@k.Title</td>
+                    <td>@k.Price</td>
+                    <td>@k.Quantity</td>
+                    <td>@(k.Price*@k.Quantity)</td>
+                </tr>
+                n+=@k.Price*@k.Quantity;
+
+            }
+            <tr>
+                <td>Total</td>
+                <td>@n</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial name="checkoutpartial"></partial>
+<br>
+<form action="/Home/Charge" method="post">
+    <label>Payment $@n</label>
+    <script src="//checkout.stripe.com/v2/checkout.js" 
+        class="stripe-button"
+        data-key="@Stripe.Value.PublishableKey" 
+        data-description="Your Shopping" 
+        data-amount="@(n*100)">
+    </script>
+</form>

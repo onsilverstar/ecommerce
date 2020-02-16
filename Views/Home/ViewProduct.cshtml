@@ -1,0 +1,43 @@
+@model Product
+<div class="container">
+    @{
+        int m=0;
+        foreach(var t in ViewBag.purchases)
+        {
+            m+=1;
+        }
+        <a asp-action="Checkout"><h6>Shopping Cart(@m)</h6></a>
+        }
+
+    <div class="productbar">
+        <h4><strong>@ViewBag.product.Title</strong></h4>
+        <img src="@ViewBag.product.Image"></div>
+    <div class="productdescription">
+        <p>@ViewBag.product.Description</p>
+    </div> 
+    <form asp-action="AddToCart" method="post" asp-controller="ShoppingCart">
+        <select asp-for="Quantity">
+            @{for(var i=0; i<ViewBag.product.InitialQuantity; i++)
+            {
+                <option>@i</option>
+            }}
+        </select>
+        <input type="hidden" asp-for="ProductId" value=@ViewBag.product.ProductId>
+        <input type="submit" value="Add to Cart">
+    </form>
+    <div class="productssilimar">
+        <h5 class="title"><em>Similar Items</em></h5>
+        <div>
+            @{foreach(var y in ViewBag.similar)
+                {
+                    <div class="component">
+                        <a asp-action="ViewProduct" asp-route-productid="@y.ProductId"><img src="@y.Image"></a>
+                            <h5 class="price">$@y.Price</h5>
+                            <h6 id="label">@y.Title</h6>
+                    </div>
+                    
+                }
+            }
+        </div>
+    </div>
+</div>

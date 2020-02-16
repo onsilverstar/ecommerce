@@ -1,0 +1,48 @@
+@model Product
+<partial name="menupartial"></partial>
+<h5>Add Product</h5>
+<form asp-action="AddProducts">
+    <div class="form-group">
+        <span asp-validation-for="Title"></span>
+        <label>Title</label>
+        <input class="form-control" asp-for="Title">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="InitialQuantity"></span>
+        <label>Quantity</label>
+        <input class="form-control" asp-for="InitialQuantity">
+    </div>
+    <div class="form group">
+        <span asp-validation-for="Image"></span>
+        <label>Url</label>
+        <input class="form-control"  asp-for="Image">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Description"></span>
+        <label>Description</label>
+        <input class="form-control" asp-for="Description">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Price"></span>
+        <label asp-for="Price"></label>
+        <input class="form-control" asp-for="Price">
+    </div>
+    <input class="btn btn-default" type="submit" value="Add">
+</form>
+<form asp-action="Products">
+        <div class="form-group">
+            <input  asp-for="Title" class="form-control" placeholder="search......" asp-action="Search">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Filter">
+        </div>
+    </form>
+    <a asp-action="Checkout" class="checkout"><button>Proceed to Checkout</button></a>
+
+
+<a asp-action="Show">show more...</a>
+
+<a asp-action="Show">show more...</a>
+<div>
+    <h5>Recent Orders</h5>
+</div>
