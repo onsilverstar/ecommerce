@@ -16,7 +16,7 @@
             {
                 <div class="products">
                     <div class="component">
-                        <a asp-action="ViewProduct" asp-route-productid="@x.ProductId"><img src="@x.Image"></a>
+                        <a asp-action="ViewProduct" asp-route-productid="@x.ProductId"><img src="~/uploads/@x.Image"></a>
                             <h5 class="price">$@x.Price</h5>
                     </div>
                     <h6 id="label">@x.Title</h6>

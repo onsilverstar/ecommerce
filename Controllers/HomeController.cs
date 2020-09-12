@@ -1,4 +1,5 @@
-﻿                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                using System;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,14 +15,25 @@ using Newtonsoft.Json;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 namespace Commercial.Controllers
 {
     public class HomeController : Controller
     {
+        private string GetUniqueFileName(string fileName)
+            {
+                fileName = Path.GetFileName(fileName);
+                return  Path.GetFileNameWithoutExtension(fileName)
+                        + "_" 
+                        + Guid.NewGuid().ToString().Substring(0, 4) 
+                        + Path.GetExtension(fileName);
+            }
         private MyContext dbcontext;
-        public HomeController(MyContext context)
+        private readonly IHostingEnvironment hostingEnvironment;
+        public HomeController(MyContext context, IHostingEnvironment environment)
         {
             dbcontext=context;
+            hostingEnvironment=environment;
             
         }
         [Route("")]
@@ -43,9 +55,9 @@ namespace Commercial.Controllers
         [HttpGet]
         public IActionResult AllOrders()
         {
-            var myuserswithorders=dbcontext.cartitems.Include(k=>k.customer).ToList();
+            //var myuserswithorders=dbcontext.cartitems.Include(k=>k.customer).ToList();
              
-            return View(myuserswithorders);
+            return View();
         }
         [Route("addorders")]
         [HttpPost]
@@ -128,19 +140,35 @@ namespace Commercial.Controllers
             
         }
         [Route("addproducts")]
-        [HttpPost]
-        public IActionResult AddProducts(Product newproduct)
+        [HttpGet]
+        public IActionResult AddProduct()
         {
-            var toadd=new Product();
+            return View("AddProduct");
+            
+        }
+        [Route("processaddproducts")]
+        [HttpPost]
+        public IActionResult ProcessAddProduct(Product newproduct)
+        {
+            Product toadd=new Product();
             toadd.Title=newproduct.Title;
-            toadd.Image=newproduct.Image;
             toadd.Description=newproduct.Description;
             toadd.Price=newproduct.Price;
             toadd.InitialQuantity=newproduct.InitialQuantity;
-            toadd.Quantity=newproduct.Quantity;
-            dbcontext.products.Add(toadd);
+            if(newproduct.photo!=null)
+            {
+                var newproductFileName=Guid.NewGuid().ToString()+"_"+newproduct.photo.FileName;
+                var newproductUpload=Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                var newproductFilePath=Path.Combine(newproductUpload, newproductFileName);
+                var newfile=new FileStream(newproductFilePath, FileMode.Create);
+                newproduct.photo.CopyTo(newfile);
+                newfile.Close();
+                toadd.Image=newproductFileName;
+                dbcontext.products.Add(toadd);
+            }
             dbcontext.SaveChanges();
-            return RedirectToAction("Products");
+            
+            return View("AddProduct");
             
         }
         
@@ -164,23 +192,21 @@ namespace Commercial.Controllers
         [HttpGet]
         public IActionResult ViewProduct(int productid)
         {
-            ViewBag.product=dbcontext.products.FirstOrDefault(h=>h.ProductId==productid);
+            var product=dbcontext.products.FirstOrDefault(h=>h.ProductId==productid);
+            ViewBag.product=product;
             ViewBag.similar=dbcontext.products.Where(t=>t.Title.Contains(dbcontext.products.FirstOrDefault(h=>h.ProductId==productid).Title)).Where(n=>n.ProductId!=productid).ToList();
-            //if (HttpContext.Session.GetObjectFromJson<List<Order>>("cart")!=null)
+            var products=new List<Product>();
+            if (HttpContext.Session.GetObjectFromJson<List<Product>>("cart")!=null)
+            {
+                var ordersbought=HttpContext.Session.GetObjectFromJson<List<Product>>("cart").ToList();
+                foreach(var v in ordersbought)
+                {
+                    products.Add(v);
+                }
+            }
             
-                //var ordersbought=HttpContext.Session.GetObjectFromJson<List<Order>>("cart").ToList();
-                var products=new List<Product>();
-                //foreach(var v in ordersbought)
-               // {
-                   // products.Add(v.product);
-
-                //}
                 ViewBag.purchases=products;
-               // HttpContext.Session.SetObjectAsJson("purchases", products);
-                //return View("ViewProduct");
-        
-            
-            ViewBag.purchases=new List<Product>{}; 
+    
             return View("ViewProduct");
         }
         [Route("Adminlogin")]
@@ -190,8 +216,38 @@ namespace Commercial.Controllers
         {
             return View();
         }
-        
+        [Route("addtocart")]
+        [HttpPost]
+        public IActionResult AddToCart(Product m)
+        {
+            var product=dbcontext.products.FirstOrDefault(n=>n.ProductId==m.ProductId);
+            product.Quantity=m.Quantity;
+            var products=new List<Product>();
+            products.Add(product);
+            if (HttpContext.Session.GetObjectFromJson<List<Product>>("cart")!=null)
+            {
+            var ordersbought=HttpContext.Session.GetObjectFromJson<List<Product>>("cart").ToList();
 
+                foreach(var v in ordersbought)
+                {
+                    products.Add(v);
+                }
+                HttpContext.Session.SetObjectAsJson("cart", products);
+            }
+                ViewBag.similar=dbcontext.products.Where(t=>t.Title.Contains(dbcontext.products.FirstOrDefault(h=>h.ProductId==m.ProductId).Title)).Where(n=>n.ProductId!=m.ProductId).ToList();
+                ViewBag.purchases=products;
+                ViewBag.product=product;
+                HttpContext.Session.SetObjectAsJson("cart", products);
+                return View("ViewProduct");
+        }
+        [Route("checkout")]
+        [HttpGet]
+        [Authorize(Roles="Level1")]
+        public IActionResult Checkout()
+        {
+             ViewBag.purchases=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
+            return View();
+        }
     }
 }
 

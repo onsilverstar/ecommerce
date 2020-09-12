@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Commercial.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20190924074626_one")]
-    partial class one
+    [Migration("20200811104825_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,9 +19,9 @@ namespace Commercial.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Commercial.Models.CartItem", b =>
+            modelBuilder.Entity("Commercial.Models.Order", b =>
                 {
-                    b.Property<int>("CartItemId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
@@ -34,27 +34,21 @@ namespace Commercial.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<int?>("ProductId");
+                    b.Property<int>("ProductId");
 
                     b.Property<int>("Quantity");
 
-                    b.Property<string>("ShoppingCartId");
-
                     b.Property<string>("State");
-
-                    b.Property<string>("UserId");
 
                     b.Property<string>("ZipCode");
 
-                    b.HasKey("CartItemId");
+                    b.Property<string>("customerId");
 
-                    b.HasIndex("ProductId");
+                    b.HasKey("OrderId");
 
-                    b.HasIndex("ShoppingCartId");
+                    b.HasIndex("customerId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("cartitems");
+                    b.ToTable("orders");
                 });
 
             modelBuilder.Entity("Commercial.Models.Product", b =>
@@ -68,47 +62,17 @@ namespace Commercial.Migrations
 
                     b.Property<int>("InitialQuantity");
 
+                    b.Property<int?>("OrderId");
+
                     b.Property<int>("Price");
 
                     b.Property<string>("Title");
 
                     b.HasKey("ProductId");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("products");
-                });
-
-            modelBuilder.Entity("Commercial.Models.ShippingInformation", b =>
-                {
-                    b.Property<string>("ShippingInformationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("Address2");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("State");
-
-                    b.Property<string>("ZipCode");
-
-                    b.HasKey("ShippingInformationId");
-
-                    b.ToTable("shippingdetails");
-                });
-
-            modelBuilder.Entity("Commercial.Models.ShoppingCart", b =>
-                {
-                    b.Property<string>("ShoppingCartId")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("ShoppingCartId");
-
-                    b.ToTable("carts");
                 });
 
             modelBuilder.Entity("Commercial.Models.User", b =>
@@ -272,19 +236,18 @@ namespace Commercial.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Commercial.Models.CartItem", b =>
+            modelBuilder.Entity("Commercial.Models.Order", b =>
                 {
-                    b.HasOne("Commercial.Models.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("Commercial.Models.ShoppingCart")
-                        .WithMany("MyCart")
-                        .HasForeignKey("ShoppingCartId");
-
                     b.HasOne("Commercial.Models.User", "customer")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("customerId");
+                });
+
+            modelBuilder.Entity("Commercial.Models.Product", b =>
+                {
+                    b.HasOne("Commercial.Models.Order")
+                        .WithMany("products")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

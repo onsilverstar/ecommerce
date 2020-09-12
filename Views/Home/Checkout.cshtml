@@ -1,13 +1,14 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
+@model Order
 <partial name="menupartial"></partial>
 <table class="table table-bordered">
     <thead>
         <tr>
-            <td>Item</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Total</td>
+            <td><strong>Item</strong></td>
+            <td><strong>Price</strong></td>
+            <td><strong>Quantity</strong></td>
+            <td><strong>Total</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +31,45 @@
         }
     </tbody>
 </table>
-<partial name="checkoutpartial"></partial>
+<form asp-action="ProcessOrder" asp-controller="Account" method="post">
+    <h3><strong>Shipping Information</strong></h3>
+    <div class="form-group">
+        <span asp-validation-for="FirstName"></span>
+        <label asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName">
+    </div>
+    <div>
+        <span asp-validation-for="LastName"></span>
+        <label asp-for="LastName"></label>
+        <input class="form-control"  asp-for="LastName">
+    </div>
+    <div>
+        <span asp-validation-for="Address"></span>
+        <label asp-for="Address"></label>
+        <input class="form-control" asp-for="Address">
+    </div>
+    <div>
+        <span asp-validation-for="Address2"></span>
+        <label asp-for="Address2"></label>
+        <input class="form-control"  asp-for="Address2">
+    </div>
+    <div>
+        <span asp-validation-for="City"></span>
+        <label asp-for="City"></label>
+        <input class="form-control" asp-for="City">
+    </div>
+    <div>
+        <span asp-validation-for="State"></span>
+        <label asp-for="State"></label>
+        <input class="form-control" asp-for="State">
+    </div>
+    <div>
+        <span asp-validation-for="ZipCode"></span>
+        <label asp-for="ZipCode"></label>
+        <input class="form-control" asp-for="ZipCode">
+        <input type="submit" value="Send">
+    </div>
+</form>
 <br>
 <form action="/Home/Charge" method="post">
     <label>Payment $@n</label>

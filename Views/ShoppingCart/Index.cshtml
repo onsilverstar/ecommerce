@@ -1,6 +1,6 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
-@model List<CartItem>
+@model List<Product>
 <partial name="menupartial"></partial>
 <table class="table table-bordered">
     <thead>
@@ -16,10 +16,10 @@
             foreach(var k in Model)
             {
                 <tr>
-                    <td>@k.product.Title</td>
-                    <td>@k.product.Price</td>
+                    <td>@k.Title</td>
+                    <td>@k.Price</td>
                     <td>@k.Quantity</td>
-                    <td>@(@k.product.Price*@k.Quantity)</td>
+                    <td>@(@k.Price*@k.Quantity)</td>
                 </tr>
 
             }

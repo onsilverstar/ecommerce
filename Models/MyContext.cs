@@ -16,20 +16,8 @@ public class MyContext : IdentityDbContext<User>
             
         }
         public Microsoft.EntityFrameworkCore.DbSet<User> customers {get; set;}
-        public Microsoft.EntityFrameworkCore.DbSet<ShippingInformation> shippingdetails {get; set;}
         public Microsoft.EntityFrameworkCore.DbSet<Product> products {get; set;}
-        public Microsoft.EntityFrameworkCore.DbSet<ShoppingCart> carts {get; set;}
-        public Microsoft.EntityFrameworkCore.DbSet<CartItem> cartitems {get; set;}
-       
-     /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-       {
-           base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Order>()
-           .HasOne(p => p.product)
-            .WithMany(b => b.Buyers)
-            .HasForeignKey(d =>d.ProductId )
-            .HasConstraintName("ProductId_Product_Order");
-     }*/
+        public Microsoft.EntityFrameworkCore.DbSet<Order> orders {get; set;}
                 
     }
     

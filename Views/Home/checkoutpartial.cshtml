@@ -1,6 +1,6 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
-@model ShippingInformation
+@model Order
 
 <form asp-action="ProcessOrder" asp-controller="Account" method="post">
     <h3><strong>Shipping Information</strong></h3>

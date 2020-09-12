@@ -84,35 +84,26 @@ namespace Commercial.Controllers
         {
             return View("Register");
         }
-       // [Route("processorders")]
-       // [HttpPost]
-       /* public IActionResult ProcessOrder(ShippingInformation v)
+       [Route("processorders")]
+       [HttpPost]
+        public IActionResult ProcessOrder(Order v)
         {
-            var Items = HttpContext.Session.GetObjectFromJson<List<Order>>("cart");
-            var myorder = new Order();
-            List<Order> products = new List<Order>();
-            var product = new Product();
-            List<Product> mypurchases = new List<Product>();
-            var mycart=new Cart();
-            var name = HttpContext.User.Identity.Name;
-            int[] shoppingquantities = new int[Items.Count];
-            Product[] myshoppping = new Product[Items.Count];
-            var currcustomer = dbcontext.Users.FirstOrDefault(d => d.UserName == name);
-            //myorder.Address = v.Address;
-            //myorder.Address2 = v.Address2;
-            //myorder.City = v.City;
-            //myorder.FirstName = v.FirstName;
-            //myorder.LastName = v.LastName;
-            //myorder.State = v.State;
-//myorder.ZipCode = v.ZipCode;
+            var myorder=new Order();
+            myorder.customer=dbcontext.Users.FirstOrDefault(k=>k.UserName==User.Identity.Name);
+            myorder.Address = v.Address;
+            myorder.Address2 = v.Address2;
+            myorder.City = v.City;
+            myorder.FirstName = v.FirstName;
+            myorder.LastName = v.LastName;
+            myorder.State = v.State;
+            myorder.ZipCode = v.ZipCode;
         
-                mycart.purchases=Items;
-                dbcontext.carts.Add(mycart);
+                dbcontext.orders.Update(myorder);
                 dbcontext.SaveChanges();
                 
 
-            return RedirectToAction("AllOrders", "Home");
-        }*/
+            return RedirectToAction("Dashboard", "Home");
+        }
 
         
     }

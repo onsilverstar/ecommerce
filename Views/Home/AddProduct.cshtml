@@ -1,0 +1,29 @@
+@model Product
+<form enctype="multipart/form-data" asp-action="ProcessAddProduct" method="POST">
+    <div class="form-group">
+        <span asp-validation-for="Title"></span>
+        <label>Title</label>
+        <input class="form-control" asp-for="Title">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="InitialQuantity"></span>
+        <label>Quantity</label>
+        <input class="form-control" asp-for="InitialQuantity">
+    </div>
+    <div class="form group">
+        <span asp-validation-for="photo"></span>
+        <label>Image</label>
+        <input class="form-control"  asp-for="photo">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Description"></span>
+        <label>Description</label>
+        <input class="form-control" asp-for="Description">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Price"></span>
+        <label asp-for="Price">Price</label>
+        <input class="form-control" asp-for="Price">
+    </div>
+    <input class="btn btn-default" type="submit" value="Add">
+</form>
