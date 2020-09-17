@@ -1852,6 +1852,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Account\\stripeprocess.cshtml",
+      "TargetPath": "Views\\Account\\stripeprocess.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Home\\Products.cshtml",
       "TargetPath": "Views\\Home\\Products.cshtml",
       "FileKind": "mvc"

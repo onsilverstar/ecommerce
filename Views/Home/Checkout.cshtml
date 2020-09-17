@@ -67,16 +67,8 @@
         <span asp-validation-for="ZipCode"></span>
         <label asp-for="ZipCode"></label>
         <input class="form-control" asp-for="ZipCode">
-        <input type="submit" value="Send">
+        <input type="submit" value="Proceed to Payment">
     </div>
 </form>
 <br>
-<form action="/Home/Charge" method="post">
-    <label>Payment $@n</label>
-    <script src="//checkout.stripe.com/v2/checkout.js" 
-        class="stripe-button"
-        data-key="@Stripe.Value.PublishableKey" 
-        data-description="Your Shopping" 
-        data-amount="@(n*100)">
-    </script>
-</form>
+

@@ -1,0 +1,13 @@
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+@model float
+
+<form action="/Home/Charge" method="post">
+    <label>Payment $@Model</label>
+    <script src="//checkout.stripe.com/v2/checkout.js" 
+        class="stripe-button"
+        data-key="@Stripe.Value.PublishableKey" 
+        data-description="Your Shopping" 
+        data-amount="@(Model*100)">
+    </script>
+</form>

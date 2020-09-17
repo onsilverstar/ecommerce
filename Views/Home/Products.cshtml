@@ -6,7 +6,7 @@
             foreach(var x in ViewBag.products)
             {
                 <div class="image">
-                    <img src="@x.Image">
+                    <img src="~/uploads/@x.Image">
                     <h6>@x.Title</h6>
                     <h6>(@x.InitialQuantity left)</h6>
                     <h6>Price: $@x.Price</h6>

@@ -170,3 +170,4 @@ C:\Users\onsil\OneDrive\Desktop\MyProjects\Commercial\obj\Debug\netcoreapp2.1\Co
 C:\Users\onsil\OneDrive\Desktop\MyProjects\Commercial\obj\Debug\netcoreapp2.1\Commercial.pdb
 C:\Users\onsil\OneDrive\Desktop\MyProjects\Commercial\obj\Debug\netcoreapp2.1\Commercial.csproj.CopyComplete
 C:\Users\onsil\OneDrive\Desktop\MyProjects\Commercial\obj\Debug\netcoreapp2.1\Razor\Views\Home\AddProduct.g.cshtml.cs
+C:\Users\onsil\OneDrive\Desktop\MyProjects\Commercial\obj\Debug\netcoreapp2.1\Razor\Views\Account\stripeprocess.g.cshtml.cs

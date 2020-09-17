@@ -102,7 +102,22 @@ namespace Commercial.Controllers
                 dbcontext.SaveChanges();
                 
 
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("stripeprocess");
+        }
+        [Route("stripe")]
+        [HttpGet]
+        public IActionResult stripeprocess()
+        {
+            List<Product> order=new List<Product>();
+            order=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
+            float total=0;
+            foreach(var product in order)
+            {
+                total+=product.Price*product.Quantity;
+            }
+            
+
+            return View("stripeprocess", total);
         }
 
         
