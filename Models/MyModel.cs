@@ -37,6 +37,8 @@ namespace Commercial.Models
         public string ZipCode {get; set;}
         public string State {get; set;}
         public int Quantity {get; set;}
+        //public bool Paid {get; set;}
+       // public float Cost {get; set;}
     }
     public class UserProduct
     {

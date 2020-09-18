@@ -248,6 +248,24 @@ namespace Commercial.Controllers
              ViewBag.purchases=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
             return View();
         }
+        [Route("delete{productid}")]
+        [HttpGet]
+        public IActionResult Delete(int productid)
+        {
+            List<Product> updatedproducts=new List<Product>();
+
+            foreach (var product in HttpContext.Session.GetObjectFromJson<List<Product>>("cart"))
+            {
+                if(product.ProductId!=productid)
+                {
+                    updatedproducts.Add(product);
+                }
+            }
+            ViewBag.purchases=updatedproducts;
+            HttpContext.Session.SetObjectAsJson("cart", updatedproducts);
+
+            return RedirectToAction("Checkout");
+        }
     }
 }
 

@@ -9,6 +9,9 @@
             <td><strong>Price</strong></td>
             <td><strong>Quantity</strong></td>
             <td><strong>Total</strong></td>
+            <td><strong>Status</strong></td>
+
+
         </tr>
     </thead>
     <tbody>
@@ -20,6 +23,8 @@
                     <td>@k.Price</td>
                     <td>@k.Quantity</td>
                     <td>@(k.Price*@k.Quantity)</td>
+                    <td><a asp-action="Delete" asp-route-productid="@k.ProductId">Remove</a></td>
+                    
                 </tr>
                 n+=@k.Price*@k.Quantity;
 
