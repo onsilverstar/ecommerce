@@ -116,6 +116,10 @@
             "System": {
               "target": "Package",
               "version": "[4.1.311.2, )"
+            },
+            "System.Configuration.Configurationmanager": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             }
           },
           "imports": [

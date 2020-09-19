@@ -18,6 +18,8 @@ public class MyContext : IdentityDbContext<User>
         public Microsoft.EntityFrameworkCore.DbSet<User> customers {get; set;}
         public Microsoft.EntityFrameworkCore.DbSet<Product> products {get; set;}
         public Microsoft.EntityFrameworkCore.DbSet<Order> orders {get; set;}
+        public Microsoft.EntityFrameworkCore.DbSet<Categorized> categorization {get; set;}
+
                 
     }
     

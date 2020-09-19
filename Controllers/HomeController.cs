@@ -171,15 +171,23 @@ namespace Commercial.Controllers
             return View("AddProduct");
             
         }
-        
+        [Route("Home/Charge")]
+        [HttpPost]
         public IActionResult Charge(string stripeEmail, string stripeToken)
         {
+            //for testing use testmode card no: 4242424242424242 with any future date and any three digits for cvv
             var customerService=new StripeCustomerService();
             var chargeService=new StripeChargeService();
             var customer=customerService.Create(new StripeCustomerCreateOptions {Email=stripeEmail, SourceToken=stripeToken});
             var charge=chargeService.Create(new StripeChargeCreateOptions{Amount=500, Description="Wow!", Currency="usd", CustomerId=customer.Id});
+            //int orderid=HttpContext.Session.GetObjectFromJson<int>("orderid")+1;
+            var toupdate=HttpContext.Session.GetObjectFromJson<Order>("currentorder");
+            toupdate.Paid=true;
+            dbcontext.orders.Update(toupdate);
+            dbcontext.SaveChanges();
+    
         
-            return View("Products");
+            return RedirectToAction("Dashboard");
         }
         [Route("settings")]
         [HttpGet]

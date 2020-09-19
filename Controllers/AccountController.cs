@@ -97,10 +97,19 @@ namespace Commercial.Controllers
             myorder.LastName = v.LastName;
             myorder.State = v.State;
             myorder.ZipCode = v.ZipCode;
-        
-                dbcontext.orders.Update(myorder);
-                dbcontext.SaveChanges();
-                
+            float cost=0;
+            foreach(var product in HttpContext.Session.GetObjectFromJson<List<Product>>("cart"))
+            {
+                cost+=product.Price*product.Quantity;
+            }
+            myorder.Cost=cost;
+            myorder.products=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
+            //dbcontext.orders.Update(myorder);
+            int n=dbcontext.orders.LastAsync().Result.OrderId;
+            HttpContext.Session.SetObjectAsJson("orderid", n);
+            //dbcontext.SaveChanges();
+            HttpContext.Session.SetObjectAsJson("orderid", n);
+            HttpContext.Session.SetObjectAsJson("currentorder", myorder);
 
             return RedirectToAction("stripeprocess");
         }
