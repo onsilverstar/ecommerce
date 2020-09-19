@@ -1,4 +1,4 @@
-
+@model List<Order>
 <form asp-action="SearchOrders">
     <input class="form-control" placeholder="Search..."> 
 </form>
@@ -22,7 +22,7 @@
                 <td>@k.customer.UserName</td>
                 <td>@DateTime.Now</td>
                 <td>@k.FirstName @k.LastName @k.Address @k.City @k.ZipCode @k.State</td>
-                <td>@k.customer.Products.Count</td>
+                <td>@k.Cost</td>
                 <td>Shipped</td>
                 </tr>
 

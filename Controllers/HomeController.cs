@@ -55,9 +55,9 @@ namespace Commercial.Controllers
         [HttpGet]
         public IActionResult AllOrders()
         {
-            //var myuserswithorders=dbcontext.cartitems.Include(k=>k.customer).ToList();
+            var myuserswithorders=dbcontext.orders.Include(k=>k.customer).ToList();
              
-            return View();
+            return View(myuserswithorders);
         }
         [Route("addorders")]
         [HttpPost]

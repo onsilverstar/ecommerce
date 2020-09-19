@@ -46,6 +46,25 @@ namespace Commercial.Controllers
             return View();
             
         }
+        [Route("Account/AdminLoginPage")]
+        [HttpPost]
+        public async Task<IActionResult> AdminLoginPage(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result=await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent:false, lockoutOnFailure: true);
+                if(result.Succeeded)
+                {
+
+                    return RedirectToAction("AllOrders", "Home", model);
+                }
+                
+                    ModelState.AddModelError(string.Empty, "Invalid Login");
+                
+            }
+            return View();
+            
+        }
         [Route("Account/Register")]
         [HttpPost]
         public async Task<IActionResult> Register(User model)
@@ -56,6 +75,11 @@ namespace Commercial.Controllers
                 IdentityResult result=await userManager.CreateAsync(newuser, model.Password);
                 if(result.Succeeded)
                 {
+                    if(dbcontext.Users.Count()==0)
+                    {
+                        await userManager.AddToRoleAsync(newuser, "Level3");
+                        return RedirectToAction("AllOrders", "Home", model); 
+                    }
                     await userManager.AddToRoleAsync(newuser, "Level1");
                     return RedirectToAction("Checkout", "Home", model); 
                 }
@@ -77,6 +101,12 @@ namespace Commercial.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        [Route("Account/AdminLogin")]
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            return View("AdminLogin");
         }
         [Route("Register")]
         [HttpGet]

@@ -1822,6 +1822,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Account\\AdminLogin.cshtml",
+      "TargetPath": "Views\\Account\\AdminLogin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Home\\searchpartial.cshtml",
       "TargetPath": "Views\\Home\\searchpartial.cshtml",
       "FileKind": "mvc"
