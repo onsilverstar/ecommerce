@@ -1,14 +1,19 @@
 @model Product
-<a asp-action="Roles" asp-controller="Adminstration">Roles</a>
 <div class="container">
-    <partial name="menupartial"></partial>
-    <div class="sidebar">
-        <form asp-action="Dashboard">
+    <form asp-action="Dashboard">
             <div class="form-group">
-                <input asp-for="Title" class="form-control" type="text" placeholder="search...">
+                <input asp-for="Title" class="form-control" type="text" placeholder="Search...">
             </div>
             <div class="form-group"><input class="btn btn-primary" type="submit" value="Filter"> </div>  
         </form>
+    <div class="sidebar">
+        <h3>Categories</h3>
+        @{
+            foreach(var category in ViewBag.categories)
+            {
+                <h4><a asp-action="Filter" asp-route-filtertitle="@category.Title">@category.Title</a></h4>
+            }
+        }
     </div>
     <div class="content">
         @{

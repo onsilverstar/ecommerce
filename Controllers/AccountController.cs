@@ -135,10 +135,7 @@ namespace Commercial.Controllers
             myorder.Cost=cost;
             myorder.products=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
             //dbcontext.orders.Update(myorder);
-            int n=dbcontext.orders.LastAsync().Result.OrderId;
-            HttpContext.Session.SetObjectAsJson("orderid", n);
             //dbcontext.SaveChanges();
-            HttpContext.Session.SetObjectAsJson("orderid", n);
             HttpContext.Session.SetObjectAsJson("currentorder", myorder);
 
             return RedirectToAction("stripeprocess");

@@ -31,7 +31,7 @@
             @{foreach(var y in ViewBag.similar)
                 {
                     <div class="component">
-                        <a asp-action="ViewProduct" asp-route-productid="@y.ProductId"><img src="@y.Image"></a>
+                        <a asp-action="ViewProduct" asp-route-productid="@y.ProductId"><img src="~/uploads/@y.Image"></a>
                             <h5 class="price">$@y.Price</h5>
                             <h6 id="label">@y.Title</h6>
                     </div>

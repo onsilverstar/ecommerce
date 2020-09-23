@@ -19,6 +19,8 @@ public class MyContext : IdentityDbContext<User>
         public Microsoft.EntityFrameworkCore.DbSet<Product> products {get; set;}
         public Microsoft.EntityFrameworkCore.DbSet<Order> orders {get; set;}
         public Microsoft.EntityFrameworkCore.DbSet<Categorized> categorization {get; set;}
+        public Microsoft.EntityFrameworkCore.DbSet<Category> category {get; set;}
+
 
                 
     }

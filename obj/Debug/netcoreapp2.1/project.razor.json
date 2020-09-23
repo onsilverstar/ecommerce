@@ -1887,6 +1887,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Home\\menupartialadmin.cshtml",
+      "TargetPath": "Views\\Home\\menupartialadmin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\onsil\\OneDrive\\Desktop\\MyProjects\\Commercial\\Views\\Adminstration\\Roles.cshtml",
       "TargetPath": "Views\\Adminstration\\Roles.cshtml",
       "FileKind": "mvc"

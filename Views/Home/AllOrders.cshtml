@@ -1,16 +1,17 @@
 @model List<Order>
+<div class=admin>
+<partial></partial>
 <form asp-action="SearchOrders">
     <input class="form-control" placeholder="Search..."> 
 </form>
-<table class="table table-bordered">
+<table class="table">
     <thead>
         <tr>
-            <td>OrderId</td>
-            <td>Name</td>
-            <td>Date</td>
-            <td>Shipping Address</td>
-            <td>Order Total</td>
-            <td>Status</td>
+            <td><strong>#<strong></strong></td>
+            <td><strong>Date<strong></td>
+            <td><strong>Shipping Address<strong></td>
+            <td><strong>Order Total<strong></td>
+            <td><strong>Status</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -19,11 +20,10 @@
             {
                 <tr>
                 <td>@k.OrderId</td>
-                <td>@k.customer.UserName</td>
-                <td>@DateTime.Now</td>
+                <td>@k.CreatedAt</td>
                 <td>@k.FirstName @k.LastName @k.Address @k.City @k.ZipCode @k.State</td>
                 <td>@k.Cost</td>
-                <td>Shipped</td>
+                <td>Shipped </td>
                 </tr>
 
             }
@@ -31,3 +31,4 @@
 
     </tbody>
 </table>
+</div>

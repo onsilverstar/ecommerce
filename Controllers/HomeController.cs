@@ -36,19 +36,29 @@ namespace Commercial.Controllers
             hostingEnvironment=environment;
             
         }
+        [Route("{filtertitle}")]
+        [HttpGet]
+        public IActionResult Filter(Product a, string filtertitle)
+        {
+            a.Title=filtertitle;
+            return RedirectToAction("Dashboard", a);
+        }
         [Route("")]
         [HttpGet]
         [HttpPost]
         public IActionResult Dashboard(Product c)
         {
             var productorders=dbcontext.products.ToList();
+            var categories=dbcontext.category.ToList();
             if (c.Title==""||c.Title==null)
             {
                 
                 ViewBag.products=productorders;
+                ViewBag.categories=categories;
                 return View();
             }
             ViewBag.products=productorders.Where(d=>d.Title==c.Title);
+            ViewBag.categories=categories;
             return View();
         }
         [Route("orders")]
@@ -143,6 +153,7 @@ namespace Commercial.Controllers
         [HttpGet]
         public IActionResult AddProduct()
         {
+            ViewBag.categories=dbcontext.category.ToList();
             return View("AddProduct");
             
         }
@@ -164,11 +175,12 @@ namespace Commercial.Controllers
                 newproduct.photo.CopyTo(newfile);
                 newfile.Close();
                 toadd.Image=newproductFileName;
+                toadd.categorization=newproduct.categorization;
                 dbcontext.products.Add(toadd);
             }
             dbcontext.SaveChanges();
             
-            return View("AddProduct");
+            return RedirectToAction("AddProduct");
             
         }
         [Route("Home/Charge")]
@@ -183,6 +195,7 @@ namespace Commercial.Controllers
             //int orderid=HttpContext.Session.GetObjectFromJson<int>("orderid")+1;
             var toupdate=HttpContext.Session.GetObjectFromJson<Order>("currentorder");
             toupdate.Paid=true;
+            toupdate.CreatedAt=DateTime.Now;
             dbcontext.orders.Update(toupdate);
             dbcontext.SaveChanges();
     

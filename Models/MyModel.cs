@@ -39,6 +39,7 @@ namespace Commercial.Models
         public int Quantity {get; set;}
         public bool Paid {get; set;}
         public float Cost {get; set;}
+        public DateTime CreatedAt {get; set;}
     }
     public class UserProduct
     {
