@@ -188,6 +188,7 @@ namespace Commercial.Controllers
         public IActionResult Charge(string stripeEmail, string stripeToken)
         {
             //for testing use testmode card no: 4242424242424242 with any future date and any three digits for cvv
+            //any email in required format will do 
             var customerService=new StripeCustomerService();
             var chargeService=new StripeChargeService();
             var customer=customerService.Create(new StripeCustomerCreateOptions {Email=stripeEmail, SourceToken=stripeToken});
