@@ -1,7 +1,13 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
 @model Order
-<partial name="menupartial"></partial>
+<div id="topbar">
+        <nav class="navbar">
+            <ul>
+                <li class="listed"><a asp-action="Dashboard" asp-controller="Home"><h4>Home</h4></a></li>
+            </ul>
+        </nav>
+</div>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -10,8 +16,6 @@
             <td><strong>Quantity</strong></td>
             <td><strong>Total</strong></td>
             <td><strong>Status</strong></td>
-
-
         </tr>
     </thead>
     <tbody>
@@ -36,44 +40,48 @@
         }
     </tbody>
 </table>
-<form asp-action="ProcessOrder" asp-controller="Account" method="post">
-    <h3><strong>Shipping Information</strong></h3>
-    <div class="form-group">
-        <span asp-validation-for="FirstName"></span>
-        <label asp-for="FirstName"></label>
-        <input class="form-control" asp-for="FirstName">
-    </div>
-    <div>
-        <span asp-validation-for="LastName"></span>
-        <label asp-for="LastName"></label>
-        <input class="form-control"  asp-for="LastName">
-    </div>
-    <div>
-        <span asp-validation-for="Address"></span>
-        <label asp-for="Address"></label>
-        <input class="form-control" asp-for="Address">
-    </div>
-    <div>
-        <span asp-validation-for="Address2"></span>
-        <label asp-for="Address2"></label>
-        <input class="form-control"  asp-for="Address2">
-    </div>
-    <div>
-        <span asp-validation-for="City"></span>
-        <label asp-for="City"></label>
-        <input class="form-control" asp-for="City">
-    </div>
-    <div>
-        <span asp-validation-for="State"></span>
-        <label asp-for="State"></label>
-        <input class="form-control" asp-for="State">
-    </div>
-    <div>
-        <span asp-validation-for="ZipCode"></span>
-        <label asp-for="ZipCode"></label>
-        <input class="form-control" asp-for="ZipCode">
-        <input type="submit" value="Proceed to Payment">
-    </div>
-</form>
-<br>
+<div class="wrapper">
+    <form asp-action="ProcessOrder" asp-controller="Account" method="post">
+        <h3><strong>Shipping Information</strong></h3>
+        <div class="form-group">
+            <span asp-validation-for="FirstName"></span>
+            <label>First Name</label>
+            <input class="form-control" asp-for="FirstName">
+        </div>
+        <div>
+            <span asp-validation-for="LastName"></span>
+            <label>Last Name</label>
+            <input class="form-control"  asp-for="LastName">
+        </div>
+        <div>
+            <span asp-validation-for="Address"></span>
+            <label>Address</label>
+            <input class="form-control" asp-for="Address">
+        </div>
+        <div>
+            <span asp-validation-for="Address2"></span>
+            <label>Second Address (Optional)</label>
+            <input class="form-control"  asp-for="Address2">
+        </div>
+        <div>
+            <span asp-validation-for="City"></span>
+            <label asp-for="City"></label>
+            <input class="form-control" asp-for="City">
+        </div>
+        <div>
+            <span asp-validation-for="State"></span>
+            <label asp-for="State"></label>
+            <input class="form-control" asp-for="State">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="ZipCode"></span>
+            <label asp-for="ZipCode"></label>
+            <input class="form-control" asp-for="ZipCode">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Proceed to Payment" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
 

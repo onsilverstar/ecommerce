@@ -1,6 +1,12 @@
 @model Product
 <div class="container">
-    <partial name="menupartial"></partial>
+    <nav class="navbar">
+        <ul>
+            <li class="listed"><a asp-action="Dashboard"><h4>Home</h4></a></li>
+            <li class="listed"><a asp-action="RegisterAccount" asp-controller="Account"><h4>Register</h4></a></li>
+            <li class="listed"><a asp-action="Login" asp-controller="Account"><h4>Login</h4></a></li>
+        </ul>
+    </nav>
     <div class="products">
         @{
             foreach(var x in ViewBag.products)

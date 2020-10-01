@@ -198,8 +198,7 @@ namespace Commercial.Controllers
             toupdate.CreatedAt=DateTime.Now;
             dbcontext.orders.Update(toupdate);
             dbcontext.SaveChanges();
-    
-        
+            HttpContext.Session.Clear();
             return RedirectToAction("Dashboard");
         }
         [Route("settings")]
@@ -266,7 +265,12 @@ namespace Commercial.Controllers
         [Authorize(Roles="Level1")]
         public IActionResult Checkout()
         {
-             ViewBag.purchases=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
+             
+             if(HttpContext.Session.GetObjectFromJson<List<Product>>("cart")==null)
+             {
+                 return RedirectToAction("Dashboard");
+             }
+            ViewBag.purchases=HttpContext.Session.GetObjectFromJson<List<Product>>("cart");
             return View();
         }
         [Route("delete{productid}")]

@@ -1,40 +1,50 @@
 @model Product
-<form enctype="multipart/form-data" asp-action="ProcessAddProduct" method="POST">
-    <div class="form-group">
-        <span asp-validation-for="Title"></span>
-        <label>Title</label>
-        <input class="form-control" asp-for="Title">
-    </div>
-    <div class="form-group">
-        <span asp-validation-for="InitialQuantity"></span>
-        <label>Quantity</label>
-        <input class="form-control" asp-for="InitialQuantity">
-    </div>
-    <div class="form group">
-        <span asp-validation-for="photo"></span>
-        <label>Image</label>
-        <input class="form-control"  asp-for="photo">
-    </div>
-    <div class="form-group">
-        <span asp-validation-for="Description"></span>
-        <label>Description</label>
-        <input class="form-control" asp-for="Description">
-    </div>
-    <div class="form-group">
-        <select asp-for="categorization" class="form-control">
-        <span asp-validation-for="categorization"></span>
-        <label>Category</label>
-        @{ foreach(var y in ViewBag.categories)
-        {
-            <option>@y.Title</option>
-        }
-        }
-        </select>
-    </div>
-    <div class="form-group">
-        <span asp-validation-for="Price"></span>
-        <label asp-for="Price">Price</label>
-        <input class="form-control" asp-for="Price">
-    </div>
-    <input class="btn btn-default" type="submit" value="Add">
-</form>
+<div id="topbar"
+    <nav class="navbar">
+        <ul>
+            <li class="listed"><a asp-action="Dashboard"><h4>Dashboard</h4></a></li>
+            <li class="listed"><a asp-action="AddProduct" asp-controller="Home"><h4>Add Product</h4></a></li>
+            <li class="listed"><a asp-action="Roles" asp-controller="Adminstration"><h4>Roles</h4></a></li>
+        </ul>
+    </nav>
+<div class="wrapper">
+    <form enctype="multipart/form-data" asp-action="ProcessAddProduct" method="POST">
+        <div class="form-group">
+            <span asp-validation-for="Title"></span>
+            <label>Title</label>
+            <input class="form-control" asp-for="Title">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="InitialQuantity"></span>
+            <label>Quantity</label>
+            <input class="form-control" asp-for="InitialQuantity">
+        </div>
+        <div class="form group">
+            <span asp-validation-for="photo"></span>
+            <label>Image</label>
+            <input class="form-control"  asp-for="photo">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Description"></span>
+            <label>Description</label>
+            <input class="form-control" asp-for="Description">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <span asp-validation-for="categorization"></span>-
+            <select asp-for="categorization" class="form-control" id="sel1" name="sellist1">
+            @{ foreach(var y in ViewBag.categories)
+            {
+                <option>@y.Title</option>
+            }
+            }
+            </select>
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="Price"></span>
+            <label asp-for="Price">Price</label>
+            <input class="form-control" asp-for="Price">
+        </div>
+        <input class="btn btn-default" type="submit" value="Add">
+    </form>
+</div>

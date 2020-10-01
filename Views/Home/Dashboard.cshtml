@@ -1,13 +1,20 @@
 @model Product
 <div class="container">
-    <form asp-action="Dashboard">
-            <div class="form-group">
-                <input asp-for="Title" class="form-control" type="text" placeholder="Search...">
-            </div>
-            <div class="form-group"><input class="btn btn-primary" type="submit" value="Filter"> </div>  
+    <div id="topbar">
+        <form asp-action="Dashboard" class="searchgroup">
+            <input id="search" asp-for="Title" type="text" placeholder="Search...">
         </form>
+        <nav class="navbar">
+            <ul>
+                <li class="listed"><a asp-action="Dashboard"><h4>Home</h4></a></li>
+                <li class="listed"><a asp-action="RegisterAccount" asp-controller="Account"><h4>Register</h4></a></li>
+                <li class="listed"><a asp-action="Login" asp-controller="Account"><h4>Login</h4></a></li>
+            </ul>
+        </nav>
+    </div>
+    
     <div class="sidebar">
-        <h3>Categories</h3>
+        <h3># Categories</h3>
         @{
             foreach(var category in ViewBag.categories)
             {
@@ -26,6 +33,10 @@
                     </div>
                     <h6 id="label">@x.Title</h6>
                 </div>}}
+    </div>
+    <div class=footer>
+            <p class="trademark">Silvester Jumba &#169; All Rights Reserved</p>
+    </div>
 
 </div>
 

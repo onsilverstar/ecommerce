@@ -1,9 +1,15 @@
 @model List<Order>
-<div class=admin>
-<partial></partial>
-<form asp-action="SearchOrders">
-    <input class="form-control" placeholder="Search..."> 
-</form>
+<div class="container">
+<div id="topbar"
+    <nav class="navbar">
+        <ul>
+            <li class="listed"><a asp-action="Dashboard"><h4>Dashboard</h4></a></li>
+            <li class="listed"><a asp-action="AddProduct" asp-controller="Home"><h4>Add Product</h4></a></li>
+            <li class="listed"><a asp-action="Roles" asp-controller="Adminstration"><h4>Roles</h4></a></li>
+        </ul>
+    </nav>
+</div>
+<div class="tablewrapper">
 <table class="table">
     <thead>
         <tr>
@@ -31,4 +37,5 @@
 
     </tbody>
 </table>
+</div>
 </div>

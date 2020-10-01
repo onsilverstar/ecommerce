@@ -15,6 +15,7 @@
     <div class="productdescription">
         <p>@ViewBag.product.Description</p>
     </div> 
+    <a asp-action="Dashboard">Continue Shopping</a>
     <form asp-action="AddToCart" method="post" >
         <select asp-for="Quantity">
             @{for(var i=0; i<ViewBag.product.InitialQuantity; i++)
