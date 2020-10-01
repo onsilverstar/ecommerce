@@ -29,7 +29,7 @@ namespace Commercial.Controllers
         }
         [Route("Account/Login")]
         [HttpPost]
-        public async Task<IActionResult> Login(User model)
+        public async Task<IActionResult> ProcessLogin(User model)
         {
             if (ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace Commercial.Controllers
                 if(result.Succeeded)
                 {
 
-                    return RedirectToAction("Checkout", "Home", model);
+                    return RedirectToAction("Checkout", "Home");
                 }
                 
                     ModelState.AddModelError(string.Empty, "Invalid Login");
@@ -67,7 +67,7 @@ namespace Commercial.Controllers
         }
         [Route("Account/Register")]
         [HttpPost]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> ProcessRegister(User model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace Commercial.Controllers
                         return RedirectToAction("AllOrders", "Home", model); 
                     }
                     await userManager.AddToRoleAsync(newuser, "Level1");
-                    return RedirectToAction("Checkout", "Home", model); 
+                    return RedirectToAction("Checkout", "Home"); 
                 }
                 foreach(var error in result.Errors)
                 {
@@ -104,9 +104,9 @@ namespace Commercial.Controllers
         }
         [Route("Account/AdminLogin")]
         [HttpGet]
-        public IActionResult AdminLogin()
+        public IActionResult AdminLogin(User model)
         {
-            return View("AdminLogin");
+            return View();
         }
         [Route("Register")]
         [HttpGet]

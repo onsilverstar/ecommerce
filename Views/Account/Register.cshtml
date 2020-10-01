@@ -7,7 +7,7 @@
         </nav>
 </div>
 <div class="wrapper">
-    <form asp-action="Register" asp-controller="Account">
+    <form asp-action="ProcessRegister" asp-controller="Account" method="POST">
         <div class="form-group">
             <span asp-validation-for="UserName"></span>
             <label>Username</label>
